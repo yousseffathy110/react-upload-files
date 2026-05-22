@@ -3,7 +3,7 @@ export function UploadInput() {
     <label htmlFor="file-input">
       <input
         type="file"
-        accept=".png,.jpg,.jpeg,.svg,.gif"
+        accept=".png,.jpg,.jpeg,.svg,.gif,.pdf"
         id="file-input"
         hidden
         multiple
