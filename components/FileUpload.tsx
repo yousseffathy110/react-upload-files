@@ -1,82 +1,19 @@
-"use client";
-
-import { ChangeEvent, useState } from "react";
-
-function normalizeFilesType(files: FileList) {
-  return Array.from(files).map((file) => ({
-    name: file.name,
-    size: file.size,
-    type: file.type,
-  }));
-}
+import { UploadIcon } from "./UploadIcon";
+import { UploadInput } from "./UploadInput";
 
 export function FileUpload() {
-  const [files, setFiles] = useState<FileList | null>(null);
-  const [upload, setIsUpload] = useState(false);
-
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = event.target.files;
-    if (!selectedFiles) return;
-    setFiles(selectedFiles);
-  };
-
-  const handleUpload = () => {
-    if (!files) return;
-    setIsUpload(true);
-  };
-
-  function clearAll() {
-    setFiles(null);
-    setIsUpload(false);
-  }
-
   return (
-    <div>
-      <p className="text-xl font-bold">File Upload</p>
-      <div className="flex items-center gap-2 mt-3 [&>button]:text-black [&>button]:cursor-pointer [&>button]:text-lg [&>button]:font-semibold [&>button]:hover:bg-orange-400 [&>button]:transition-colors [&>button]:duration-400">
-        <input
-          type="file"
-          onChange={handleFileChange}
-          multiple
-          accept="image/*"
-        />
-        <button
-          className="w-30 h-10 rounded-sm bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!files || files.length === 0}
-          onClick={handleUpload}
-        >
-          Upload
-        </button>
-        <button
-          className="w-30 h-10 rounded-sm bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!files || files.length === 0}
-          onClick={clearAll}
-        >
-          clear all
-        </button>
-      </div>
-      {upload && files && <FileUploadTemplate files={files} />}
-    </div>
-  );
-}
-
-function FileUploadTemplate({ files }: { files: FileList }) {
-  const data = normalizeFilesType(files);
-
-  return (
-    <div>
-      files: {data.length}
-      {data.map((file) => (
-        <div
-          key={file.name}
-          className="space-y-2 bg-red-400 p-3 rounded-sm mt-3"
-        >
-          <p>{file.name}</p>
-          <p>
-            {Math.round(file.size / 1024).toFixed(2)} KB - {file.type}
+    <div className="container mx-auto border border-gray-300 md:py-4 md:px-5 p-2 rounded-sm md:rounded-md shadow-sm space-y-3 md:space-y-5">
+      <h1 className="text-sm md:text-base font-bold">File upload example:</h1>
+      <div className="p-2 md:py-4 md:px-5 border-dashed border-2 rounded-sm md:rounded-md border-gray-300 max-w-lg min-h-31.5 flex items-center justify-center mx-auto flex-col gap-2">
+        <UploadIcon />
+        <div className="space-y-1 text-center">
+          <UploadInput />
+          <p className="text-xs text-[#525252] font-medium tracking-tight">
+            SVG, PNG, JPG or GIF (max. 800x400px)
           </p>
         </div>
-      ))}
+      </div>
     </div>
   );
 }
