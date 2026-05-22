@@ -1,7 +1,11 @@
 import { CloudUpload, Trash2 } from "lucide-react";
 import FileIcon from "./FileIcon";
 
-export function UploadListItem({ type }: { type: string }) {
+export function UploadListItem({
+  type,
+}: {
+  type: "SVG" | "PNG" | "JPG" | "GIF" | "PDF";
+}) {
   return (
     <li className="p-2 md:p-4 border rounded-sm md:rounded-md border-gray-300 w-full flex items-start gap-2">
       <FileIcon extension={type} />
@@ -30,9 +34,9 @@ export function UploadListItem({ type }: { type: string }) {
 
         <div
           role="progressbar"
-          //   aria-valuenow="50"
-          aria-valuemin="0"
-          aria-valuemax="100"
+          //   aria-valuenow={50}
+          aria-valuemin={0}
+          aria-valuemax={100}
           className="h-2 w-full overflow-hidden rounded-md bg-[#e5e5e5] mt-1"
         >
           <div
