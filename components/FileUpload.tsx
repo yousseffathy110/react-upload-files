@@ -1,8 +1,13 @@
+"use client";
+import { useState } from "react";
 import { UploadIcon } from "./UploadIcon";
 import { UploadInput } from "./UploadInput";
 import { UploadListItem } from "./UploadListItem";
 
 export function FileUpload() {
+  const [files, setFiles] = useState<File[]>([]);
+  console.log(files);
+
   return (
     <div className="container mx-auto border border-gray-300 md:py-4 md:px-5 p-2 rounded-sm md:rounded-md shadow-sm space-y-3 md:space-y-5">
       <h1 className="text-sm md:text-base font-bold">File upload example:</h1>
@@ -11,7 +16,7 @@ export function FileUpload() {
         <div className="p-2 md:py-4 md:px-5 border-dashed border-2 rounded-sm md:rounded-md border-gray-300 flex items-center justify-center mx-auto flex-col gap-2">
           <UploadIcon />
           <div className="space-y-1 text-center">
-            <UploadInput />
+            <UploadInput setFiles={setFiles} />
             <p className="text-xs text-[#525252] font-medium tracking-tight">
               SVG, PNG, JPG or GIF (max. 800x400px)
             </p>
@@ -19,12 +24,10 @@ export function FileUpload() {
         </div>
 
         {/* files list */}
-        <ul className="space-y-2">
-          <UploadListItem type="SVG" />
-          <UploadListItem type="PNG" />
-          <UploadListItem type="JPG" />
-          <UploadListItem type="GIF" />
-          <UploadListItem type="PDF" />
+        <ul className="space-y-2" aria-label="List of uploaded files">
+          {files.map((file) => (
+            <UploadListItem key={file.name} file={file} />
+          ))}
         </ul>
       </div>
     </div>
