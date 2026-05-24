@@ -4,9 +4,12 @@ import { UploadIcon } from "./UploadIcon";
 import { UploadInput } from "./UploadInput";
 import { UploadListItem } from "./UploadListItem";
 
+export type UploadStatusType = "idle" | "uploading" | "success" | "error";
+
 export function FileUpload() {
   const [files, setFiles] = useState<File[]>([]);
-  console.log(files)
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState<UploadStatusType>("idle");
 
   return (
     <div className="container mx-auto border border-gray-300 md:py-4 md:px-5 p-2 rounded-sm md:rounded-md shadow-sm space-y-3 md:space-y-5">
@@ -26,7 +29,13 @@ export function FileUpload() {
         {/* files list */}
         <ul className="space-y-2" aria-label="List of uploaded files">
           {files.map((file) => (
-            <UploadListItem key={file.name} file={file} setFiles={setFiles} />
+            <UploadListItem
+              key={file.name}
+              file={file}
+              setFiles={setFiles}
+              uploadProgress={uploadProgress}
+              uploadStatus={uploadStatus}
+            />
           ))}
         </ul>
       </div>
