@@ -12,23 +12,45 @@ export function UploadListItem({
 
       <div className="flex w-full flex-col">
         <div className="flex items-center justify-between w-full">
-          <span className="truncate text-sm font-medium text-secondary">
+          <span
+            className="truncate text-sm font-medium text-secondary"
+            aria-label="File name"
+          >
             Example dashboard screenshot.jpg
           </span>
-          <Trash2
-            size={16}
-            className="text-red-500 hover:text-red-600 cursor-pointer transition-colors duration-200 mt-0.5"
-          />
+          <button type="button" aria-label="Remove file">
+            <Trash2
+              size={16}
+              className="text-gray-400 hover:text-red-400 cursor-pointer transition-colors duration-300 mt-0.5"
+            />
+          </button>
         </div>
 
         <div className="flex gap-2 items-center">
-          <span className="truncate text-sm whitespace-nowrap text-[#525252]">
+          <span
+            className="truncate text-sm whitespace-nowrap text-[#525252]"
+            aria-label="File size"
+          >
             720 KB
           </span>
           <hr className="h-3 w-px rounded-t-full rounded-b-full border-none bg-gray-500" />
-          <div className="text-sm font-medium text-[#525252] flex items-center gap-1">
-            <CloudUpload size={12} color="gray" />
-            Uploading...
+          <div className="flex items-center gap-1">
+            <CloudUpload size={15} color="gray" />
+            {/* TODO: Implement upload status indicators */}
+            {/* <CircleCheck
+              size={15}
+              className="fill-green-500 [&>path]:stroke-white [&>circle]:stroke-green-500"
+            />
+            <CircleX
+              size={15}
+              className="fill-red-500 [&>path]:stroke-white [&>circle]:stroke-red-500"
+            /> */}
+            <span
+              className="text-sm font-medium text-[#525252]"
+              aria-label="Upload status"
+            >
+              Uploading...
+            </span>
           </div>
         </div>
 
