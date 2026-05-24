@@ -2,10 +2,9 @@ type FileIconProps = {
   extension: "SVG" | "PNG" | "JPG" | "GIF" | "PDF";
 };
 
-const EXTENSION_CONFIG: Record<
-  FileIconProps["extension"],
-  { color: string; width: number; path: string }
-> = {
+type FileIconConfig = { color: string; width: number; path: string };
+
+const EXTENSION_CONFIG: Record<FileIconProps["extension"], FileIconConfig> = {
   JPG: {
     color: "#7F56D9",
     width: 26,
