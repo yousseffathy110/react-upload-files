@@ -55,6 +55,7 @@ export function FileUpload() {
             type="button"
             aria-label="Upload files"
             onClick={() => uploadFilesMutation.mutate(files)}
+            disabled={isPending}
             className="w-full flex gap-2 items-center justify-center sm:max-w-50 py-2 px-4 bg-[#6941c6] text-white font-semibold rounded-md hover:bg-[#5a34a3] transition-colors duration-300 cursor-pointer"
           >
             {isPending && <Loader size={16} className="animate-spin" />}
