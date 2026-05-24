@@ -43,9 +43,11 @@ export function UploadListItem({
             className="truncate text-sm whitespace-nowrap text-[#525252]"
             aria-label="File size"
           >
-            720 KB
+            {Math.round(file.size / 1024)} KB
           </span>
+          
           <hr className="h-3 w-px rounded-t-full rounded-b-full border-none bg-gray-500" />
+          
           <div className="flex items-center gap-1">
             <CloudUpload size={15} color="gray" />
             {/* TODO: Implement upload status indicators */}

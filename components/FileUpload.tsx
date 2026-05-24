@@ -6,6 +6,7 @@ import { UploadListItem } from "./UploadListItem";
 
 export function FileUpload() {
   const [files, setFiles] = useState<File[]>([]);
+  console.log(files)
 
   return (
     <div className="container mx-auto border border-gray-300 md:py-4 md:px-5 p-2 rounded-sm md:rounded-md shadow-sm space-y-3 md:space-y-5">
