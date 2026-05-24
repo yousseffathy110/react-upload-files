@@ -1,8 +1,19 @@
 import { CloudUpload, Trash2 } from "lucide-react";
 import FileIcon from "./FileIcon";
 import { getFileExtension } from "@/utils/getFileExtension";
+import { Dispatch, SetStateAction } from "react";
 
-export function UploadListItem({ file }: { file: File }) {
+export function UploadListItem({
+  file,
+  setFiles,
+}: {
+  file: File;
+  setFiles: Dispatch<SetStateAction<File[]>>;
+}) {
+  function handleRemoveFile() {
+    setFiles((prevFiles) => prevFiles.filter((f) => f.name !== file.name));
+  }
+
   return (
     <li className="p-2 md:p-4 border rounded-sm md:rounded-md border-gray-300 w-full flex items-start gap-2">
       <FileIcon extension={getFileExtension(file)} />
@@ -15,7 +26,11 @@ export function UploadListItem({ file }: { file: File }) {
           >
             {file.name}
           </span>
-          <button type="button" aria-label="Remove file">
+          <button
+            type="button"
+            aria-label="Remove file"
+            onClick={handleRemoveFile}
+          >
             <Trash2
               size={16}
               className="text-gray-400 hover:text-red-400 cursor-pointer transition-colors duration-300 mt-0.5"

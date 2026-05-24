@@ -6,7 +6,6 @@ import { UploadListItem } from "./UploadListItem";
 
 export function FileUpload() {
   const [files, setFiles] = useState<File[]>([]);
-  console.log(files);
 
   return (
     <div className="container mx-auto border border-gray-300 md:py-4 md:px-5 p-2 rounded-sm md:rounded-md shadow-sm space-y-3 md:space-y-5">
@@ -26,7 +25,7 @@ export function FileUpload() {
         {/* files list */}
         <ul className="space-y-2" aria-label="List of uploaded files">
           {files.map((file) => (
-            <UploadListItem key={file.name} file={file} />
+            <UploadListItem key={file.name} file={file} setFiles={setFiles} />
           ))}
         </ul>
       </div>
