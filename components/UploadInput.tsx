@@ -21,6 +21,7 @@ export function UploadInput({ setFiles }: UploadInputProps) {
       <input
         type="file"
         accept=".png,.jpg,.svg,.gif,.pdf"
+        aria-label="select files to upload"
         id="file-input"
         hidden
         multiple

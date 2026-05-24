@@ -3,6 +3,8 @@ import { useState } from "react";
 import { UploadIcon } from "./UploadIcon";
 import { UploadInput } from "./UploadInput";
 import { UploadListItem } from "./UploadListItem";
+import { Loader } from "lucide-react";
+import { useUploadFiles } from "@/hooks/useUploadFiles";
 
 export type UploadStatusType = "idle" | "uploading" | "success" | "error";
 
@@ -10,6 +12,15 @@ export function FileUpload() {
   const [files, setFiles] = useState<File[]>([]);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadStatus, setUploadStatus] = useState<UploadStatusType>("idle");
+
+  const uploadFilesMutation = useUploadFiles(
+    files,
+    setFiles,
+    setUploadProgress,
+    uploadStatus,
+    setUploadStatus,
+  );
+  const { isPending } = uploadFilesMutation;
 
   return (
     <div className="container mx-auto border border-gray-300 md:py-4 md:px-5 p-2 rounded-sm md:rounded-md shadow-sm space-y-3 md:space-y-5">
@@ -21,7 +32,7 @@ export function FileUpload() {
           <div className="space-y-1 text-center">
             <UploadInput setFiles={setFiles} />
             <p className="text-xs text-[#525252] font-medium tracking-tight">
-              SVG, PNG, JPG or GIF (max. 800x400px)
+              SVG, PNG, JPG, GIF or PDF Max file size (10MB).
             </p>
           </div>
         </div>
@@ -38,6 +49,18 @@ export function FileUpload() {
             />
           ))}
         </ul>
+
+        {files && files.length > 0 && (
+          <button
+            type="button"
+            aria-label="Upload files"
+            onClick={() => uploadFilesMutation.mutate(files)}
+            className="w-full flex gap-2 items-center justify-center sm:max-w-50 py-2 px-4 bg-[#6941c6] text-white font-semibold rounded-md hover:bg-[#5a34a3] transition-colors duration-300 cursor-pointer"
+          >
+            {isPending && <Loader size={16} className="animate-spin" />}
+            {isPending ? "Uploading..." : "Upload"}
+          </button>
+        )}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import FileIcon from "./FileIcon";
 import { getFileExtension } from "@/utils/getFileExtension";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { type UploadStatusType } from "./FileUpload";
+import { normalizeFileSize } from "@/hooks/normlizeFileSize";
 
 const STATUS_CONFIG = {
   uploading: {
@@ -61,8 +62,9 @@ export function UploadListItem({
       <div className="flex w-full flex-col">
         <div className="flex items-center justify-between w-full">
           <span
-            className="truncate text-sm font-medium text-secondary"
+            className="truncate text-sm font-medium max-w-sm"
             aria-label="File name"
+            title={file.name}
           >
             {file.name}
           </span>
@@ -83,7 +85,7 @@ export function UploadListItem({
             className="truncate text-sm whitespace-nowrap text-[#525252]"
             aria-label="File size"
           >
-            {Math.round(file.size / 1024)} KB
+            {normalizeFileSize(file.size)} KB
           </span>
 
           {uploadStatus !== "idle" && (
